@@ -19,6 +19,12 @@ public class Main {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             System.out.println(response.statusCode());
             System.out.println(response.body());
+            for (var header : response.headers().map().keySet()) {
+                System.out.print(header + ": ");
+                for (var val : response.headers().map().get(header))
+                    System.out.print(val + " ");
+                System.out.println();
+            }
         }
         catch (IOException e) {
             System.out.println("Error making request");
